@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @SequenceGenerator(name = "seq_usuario", sequenceName = "seq_usuario", allocationSize = 1, initialValue = 1)
@@ -20,8 +23,13 @@ public class Pessoa implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_usuario")
 	private Long id;
+	@NotNull(message = "O nome não deve ser nulo!")
+	@NotEmpty(message = "O nome não pode ser vazio!")
 	private String nome;
+	@NotNull(message = "O sobrenome não pode ser nulo!")
+	@NotEmpty(message = "O sobrenome não pode ser vazio!")
 	private String sobrenome;
+	@Min(value = 18, message = "Idade inválida!")
 	private int idade;
 	@OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Telefone> telefones;

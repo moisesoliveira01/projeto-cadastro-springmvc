@@ -18,6 +18,12 @@ table.striped>tbody>tr:nth-child(odd) {
 form input[type=submit] {
 	color: white;
 }
+
+.erro {
+    margin-left: 20px;
+    margin-top: 20px;
+    color: red;
+}
 </style>
 
 </head>
@@ -26,6 +32,13 @@ form input[type=submit] {
   <br>
   <h5>Cadastramento</h5>
   <div class="row">
+  
+  <br>
+    <div th:each = "m : ${msgs}" class="erro">
+      <span th:text = "${m}"></span>
+    </div>
+  <br>
+  
   <form action="salvar" method="POST" id="formpessoa" th:object="${pessoaobj}">
     <div class="row">
       <div class="input-field col s6">
